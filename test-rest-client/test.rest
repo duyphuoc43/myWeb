@@ -1,0 +1,32 @@
+@hostname = localhost
+@port = 8001
+@host = {{hostname}}:{{port}}
+
+### Successq
+POST http://{{host}}/test HTTP/1.1
+content-type: application/json
+
+{
+    "name": "phuoc",
+    "age": "23"
+}
+
+### Successq
+POST http://{{host}}/items HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Phuoc",
+    "description": "ssfsd",
+    "price": 5,
+    "tax": 6
+}
+
+
+### Success
+GET  http://{{host}}/items/ HTTP/1.1
+content-type: application/json
+
+{
+
+}
