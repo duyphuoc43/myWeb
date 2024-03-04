@@ -37,7 +37,6 @@ def predictions(x_prediction):
     return y_predictions_scaled
 
 
-
 def add_values_to_last_row(file_path, flow, pressure):
     with open(file_path, 'r', newline='') as csvfile:
         reader = csv.reader(csvfile)
