@@ -1,5 +1,3 @@
-# myapp/main.py
-from typing import Optional
 from website import app
 import uvicorn
 

@@ -3,12 +3,11 @@
 @host = {{hostname}}:{{port}}
 
 ### Successq
-POST http://{{host}}/test HTTP/1.1
+POST http://{{host}}/prediction HTTP/1.1
 content-type: application/json
 
 {
-    "name": "phuoc",
-    "age": "23"
+    "array": [152. ,  14. ]
 }
 
 ### Successq
@@ -22,6 +21,14 @@ content-type: application/json
     "tax": 6
 }
 
+### Successq
+POST http://{{host}}/prediction HTTP/1.1
+content-type: application/json
+
+{
+    "pressure": 15.5,
+    "flow" : 112
+}
 
 ### Success
 GET  http://{{host}}/items/ HTTP/1.1

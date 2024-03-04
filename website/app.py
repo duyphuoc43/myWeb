@@ -1,8 +1,27 @@
 # myapp/app.py
 from fastapi import FastAPI
-from .schemas import Item
+from .schemas import Item,hourAndFlow,Image,Arrays
+from .phuoc import predictions,coverData
+
 
 app = FastAPI()
+
+
+@app.post("/prediction/")
+async def prediction(request: hourAndFlow):
+    '''Post prediction'''
+    request = predictions(coverData(request.flow,request.pressure))
+    return request
+
+@app.post("/array/")
+async def prediction(request: Arrays):
+    '''Post prediction'''
+    request = predictions(request.array)
+    return request
+
+
+
+
 
 
 @app.get("/")
@@ -27,3 +46,4 @@ async def read_item(item_id: int, q: str = None):
 async def create_item(request: Item):
     '''Post items'''
     return request
+
