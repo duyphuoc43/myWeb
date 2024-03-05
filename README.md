@@ -1,4 +1,4 @@
-Install Python3.11.6 [Python DL](https://www.python.org/downloads/)
+Install Python3.10.10 [Python DL](https://www.python.org/downloads/)
 pip install fastapi[all]
 ```bash
  $ python -m venv venv
