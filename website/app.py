@@ -6,23 +6,23 @@ from .phuoc import predictions,coverData
 
 app = FastAPI()
 
+@app.get("/prediction/{flow}/{pressure}")
+async def prediction_get(flow: float,pressure: float):
+    '''Get prediction'''
+    response = predictions(coverData(flow,pressure))
+    return response
 
 @app.post("/prediction/")
 async def prediction(request: hourAndFlow):
     '''Post prediction'''
-    request = predictions(coverData(request.flow,request.pressure))
-    return request
+    response = predictions(coverData(request.flow,request.pressure))
+    return response
 
 @app.post("/array/")
 async def prediction(request: Arrays):
     '''Post prediction'''
-    request = predictions(request.array)
-    return request
-
-
-
-
-
+    response = predictions(request.array)
+    return response
 
 @app.get("/")
 async def read_root():
@@ -43,7 +43,8 @@ async def read_item(item_id: int, q: str = None):
 
 
 @app.post("/items/")
-async def create_item(request: Item):
+async def create_item(request: Item) -> Item:
     '''Post items'''
-    return request
+    return 
+
 
