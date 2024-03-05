@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Float
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -24,3 +24,11 @@ class Item(Base):
     owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="items")
+
+
+class Statistics(Base):
+    __tablename__ = "statistics"
+
+    date = Column(DateTime, primary_key=True, comment='Thời gian')
+    flow = Column(Float, comment='Lưu lượng(m3/h)(*)')
+    pressure = Column(Float, comment='Áp lực(m)')

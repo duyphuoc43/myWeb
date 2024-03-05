@@ -17,7 +17,8 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 def create_user(db: Session, user: schemas.UserCreate):
     fake_hashed_password = user.password + "notreallyhashed"
-    db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
+    db_user = models.User(
+        email=user.email, hashed_password=fake_hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -34,3 +35,11 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db.commit()
     db.refresh(db_item)
     return db_item
+
+
+def create_statistics(date: str, flow: float, pressure: float):
+    db_statistic = models.Statistics(date=date, flow=flow, pressure=pressure)
+    Session.add(db_statistic)
+    Session.commit()
+    Session.refresh(db_statistic)
+    return db_statistic
