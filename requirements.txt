@@ -8,3 +8,4 @@ pymysql==1.1.0
 tensorflow
 numpy
 pandas
+python-multipart

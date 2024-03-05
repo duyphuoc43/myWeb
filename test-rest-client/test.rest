@@ -2,23 +2,25 @@
 @port = 8001
 @host = {{hostname}}:{{port}}
 
+
+
 ### Successq
-POST http://{{host}}/prediction HTTP/1.1
+POST http://{{host}}/upload_file HTTP/1.1
 content-type: application/json
 
 {
-    "array": [152. ,  14. ]
+    curl -X POST -F "file=@/path/to/your/image.jpg" http://localhost:8000/upload-image/
+
 }
 
-### Successq
-POST http://{{host}}/items HTTP/1.1
+
+
+### Success
+GET  http://{{host}}/prediction/130/14 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Phuoc",
-    "description": "ssfsd",
-    "price": 5,
-    "tax": 6
+
 }
 
 ### Successq
@@ -31,13 +33,6 @@ content-type: application/json
 
 }
 
-### Success
-GET  http://{{host}}/prediction/130/14 HTTP/1.1
-content-type: application/json
-
-{
-
-}
 
 
 ### Success
@@ -47,3 +42,5 @@ content-type: application/json
 {
 
 }
+
+

@@ -1,22 +1,15 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-# Tạo một đối tượng engine để kết nối đến cơ sở dữ liệu MySQL
-engine = create_engine('mysql+pymysql://username:password@localhost/databasename')
+SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+# SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
-# Tạo một đối tượng metadata để đại diện cho các bảng trong cơ sở dữ liệu
-metadata = MetaData()
-
-# Tạo một bảng mới
-new_table = Table(
-    'new_table',  # Tên của bảng
-    metadata,
-    Column('id', Integer, primary_key=True),
-    Column('name', String(255)),
-    Column('age', Integer)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Tạo bảng trong cơ sở dữ liệu
-metadata.create_all(engine)
+Base = declarative_base()
 
-# Đóng kết nối
-engine.dispose()
+
