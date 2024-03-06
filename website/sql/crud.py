@@ -17,11 +17,11 @@ def create_statistics(db: Session, request: schemas.Statistics):
         db.rollback()
 
 
-def get_statistics(db: Session, request: schemas.Statistics):
-    if request is None:
-        db.query(models.Statistics).all()
+def get_statistics(db: Session, date: str = None):
+    if date is None:
+        response = db.query(models.Statistics).all()
     else:
         response = db.query(models.Statistics).filter(
-            date == request.date
-        )
+            models.Statistics.date == date
+        ).first()
     return response

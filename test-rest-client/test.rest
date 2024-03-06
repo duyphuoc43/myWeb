@@ -7,7 +7,7 @@ POST http://{{host}}/statistics HTTP/1.1
 content-type: application/json
 
 {
-    "date": "sss",
+    "date": "2024-03-06 11:36:16.069239",
     "flow": 55,
     "pressure": 160
 }

@@ -26,9 +26,15 @@ def get_db():
         db.close()
 
 
+# @app.post("/statistics/")
+# async def post_statistics(request: schemas.Statistics, db: Session = Depends(get_db)):
+#     return crud.create_statistics(db=db, request=request)
+
+
 @app.post("/statistics/")
-async def statistics(request: schemas.Statistics, db: Session = Depends(get_db)):
-    return crud.create_statistics(db=db, request=request)
+async def get_statistics(request: schemas.Statistics, db: Session = Depends(get_db),):
+    response = crud.get_statistics(db=db, date=request.date)
+    return response
 
 
 @app.get("/prediction/{flow}/{pressure}")
