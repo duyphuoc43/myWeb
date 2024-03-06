@@ -29,6 +29,6 @@ class Item(Base):
 class Statistics(Base):
     __tablename__ = "statistics"
 
-    date = Column(DateTime, primary_key=True, comment='Thời gian')
-    flow = Column(Float, comment='Lưu lượng(m3/h)(*)')
-    pressure = Column(Float, comment='Áp lực(m)')
+    date = Column(DateTime, primary_key=True)
+    flow = Column(Float)
+    pressure = Column(Float)

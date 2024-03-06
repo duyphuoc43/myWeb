@@ -7,8 +7,8 @@ POST http://{{host}}/statistics HTTP/1.1
 content-type: application/json
 
 {
-    "date": "2023/5/1 12:00:00"
-    "flow": 55
+    "date": "sss",
+    "flow": 55,
     "pressure": 160
 }
 
@@ -37,14 +37,5 @@ content-type: application/json
 
 }
 
-
-
-### Success
-GET  http://{{host}}/items/ HTTP/1.1
-content-type: application/json
-
-{
-
-}
 
 
