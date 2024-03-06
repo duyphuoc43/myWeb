@@ -1,4 +1,7 @@
 # myapp/app.py
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 from typing import Annotated
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
@@ -6,7 +9,7 @@ from fastapi.responses import JSONResponse
 from .sql import crud, models
 from .phuoc import predictions, coverData
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI
 from sqlalchemy.orm import Session
 
 from . import schemas
@@ -24,6 +27,16 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+app = FastAPI()
+templates = Jinja2Templates(directory="templates")
+
+
+@app.get("/")
+async def read_root(request: Request):
+    '''get'''
+    return templates.TemplateResponse("panelTimes.html", {"request": request})
 
 
 # @app.post("/statistics/")
@@ -60,7 +73,7 @@ async def upload_image(file: UploadFile = File(...)):
             f.write(contents)
 
 
-@app.get("/")
-async def read_root():
-    '''Get'''
-    return {"message": "Hello, World"}
+# @app.get("/")
+# async def read_root():
+#     '''Get'''
+#     return {"message": "Hello, World"}
