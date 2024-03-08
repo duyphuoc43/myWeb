@@ -30,7 +30,7 @@ def coverData(flow,pressure):
 def predictions(x_prediction):
     x_prediction = np.array(x_prediction).reshape(1,len(x_prediction),len(x_prediction[1]))
     print(x_prediction.shape)
-    loaded_model = load_model('models/best_model_24.h5')
+    loaded_model = load_model('models_AI/best_model_24.h5')
     y_predictions_scaled = loaded_model.predict(x_prediction)
     y_predictions_scaled = y_predictions_scaled.flatten().tolist()
     return {"array": y_predictions_scaled}
