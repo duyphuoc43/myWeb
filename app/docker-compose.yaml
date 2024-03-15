@@ -1,0 +1,17 @@
+services:
+  api:
+    image: backend
+    build: 
+      context: ./backend
+    container_name: backend
+    environment:
+      PORT: 8001
+    ports:
+      - '8001:8001'
+    volumes:
+      - /Users/admin/Desktop/WebServer/app/backend/data:/data
+      - /Users/admin/Desktop/WebServer/app/backend/models_AI:/models_AI
+    # depends_on:
+    #   - mysql
+    
+

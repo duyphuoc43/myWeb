@@ -1,0 +1,13 @@
+fastapi 
+uvicorn 
+requests
+pydantic
+opencv-python == 4.9.0.80
+sqlalchemy==2.0.23
+pymysql
+tensorflow==2.14.1
+numpy
+pandas
+python-multipart
+jinja2
+typing-extensions==4.8.0
