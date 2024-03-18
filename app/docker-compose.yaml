@@ -1,39 +1,36 @@
 version: '3'
 services:
-  api:
+  app:
     image: backend
     build: 
       context: ./backend
     container_name: backend
-    environment:
-      MYSQL_HOST : mysql
-      MYSQL_USER : root
-      MYSQL_PASSWORD: phuocvnd
-      MYSQL_DATABASE : todo
+    # environment:
+    #   MYSQL_HOST : mysql
+    #   MYSQL_USER : root
+    #   MYSQL_PASSWORD: phuocvnd
+    #   MYSQL_DATABASE : todo
     ports:
       - '8001:8001'
     volumes:
       - /Users/admin/Desktop/WebServer/app/backend/data:/data
       - /Users/admin/Desktop/WebServer/app/backend/models_AI:/models_AI
-    networks:
-      - my-networks
     depends_on:
-      - mysql
+      - db
+
+
+
   db:
-    image: database
+    image: mysql:8.0.36
     container_name: database_mysql
     restart: always
     ports:
-      -0801:0801
+      - 3307:3306
     environment:
       MYSQL_ROOT_PASSWORD: phuocvnd
       MYSQL_DATABASE: mydatabase
       MYSQL_USER: phuocvnd
       MYSQL_PASSWORD: phuocvnd
-      networks:
-        - my-network
 
-networks:
-  my_network:
-    driver: bridge
+
 

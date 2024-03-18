@@ -3,6 +3,7 @@ from keras.models import load_model
 import numpy as np
 import csv
 import os
+from ..models import session
 
 
 def coverData(flow, pressure):
@@ -51,3 +52,15 @@ def add_values_to_last_row(file_path, flow, pressure):
     with open(file_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(rows)
+
+
+def add_data():
+
+    # db = Session()
+    # db_history = models.Data(
+    #     date='aaaaa', pressure=15.2, flow=130)
+    # db.add(db_history)
+    # db.commit()
+    # db.refresh(db_history)
+    # db.close()
+    return "Done"

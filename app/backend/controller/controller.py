@@ -3,7 +3,7 @@
 from fastapi import FastAPI, File, UploadFile
 from typing import Annotated
 from ..schemas import Item, hourAndFlow, Arrays, Image, Statistics
-from ..service import coverData, predictions, add_values_to_last_row
+from ..service import coverData, predictions, add_values_to_last_row, add_data
 from fastapi import FastAPI, File, UploadFile
 from typing import Union
 import uvicorn
@@ -38,3 +38,9 @@ async def upload_image(file: UploadFile = File(...)):
         contents = await file.read()
         with open("anhtest.png", "wb") as f:
             f.write(contents)
+
+
+@app.get("/get-data/")
+async def get_data():
+    response = add_data()
+    return response
