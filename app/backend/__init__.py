@@ -1,1 +1,1 @@
-from . import main
+from .controller import app

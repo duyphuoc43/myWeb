@@ -27,3 +27,9 @@ class Statistics(BaseModel):
     date: str
     flow: float
     pressure: float
+
+
+class History(BaseModel):
+    date: str
+    location: str
+    image: List[List[float]]

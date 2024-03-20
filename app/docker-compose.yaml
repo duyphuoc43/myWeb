@@ -1,22 +1,22 @@
 version: '3'
 services:
-  app:
-    image: backend
-    build: 
-      context: ./backend
-    container_name: backend
-    # environment:
-    #   MYSQL_HOST : mysql
-    #   MYSQL_USER : root
-    #   MYSQL_PASSWORD: phuocvnd
-    #   MYSQL_DATABASE : todo
-    ports:
-      - '8001:8001'
-    volumes:
-      - /Users/admin/Desktop/WebServer/app/backend/data:/data
-      - /Users/admin/Desktop/WebServer/app/backend/models_AI:/models_AI
-    depends_on:
-      - db
+  # app:
+  #   image: backend
+  #   build: 
+  #     context: ./backend
+  #   container_name: backend
+  #   # environment:
+  #   #   MYSQL_HOST : mysql
+  #   #   MYSQL_USER : root
+  #   #   MYSQL_PASSWORD: phuocvnd
+  #   #   MYSQL_DATABASE : todo
+  #   ports:
+  #     - '8001:8001'
+  #   volumes:
+  #     - /Users/admin/Desktop/WebServer/app/backend/data:/data
+  #     - /Users/admin/Desktop/WebServer/app/backend/models_AI:/models_AI
+  #   depends_on:
+  #     - db
 
 
 

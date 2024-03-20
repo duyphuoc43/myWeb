@@ -10,8 +10,4 @@ pip install fastapi[all]
 docker-compose up -d --build
 ```
 
-<<<<<<< HEAD
-docker compose up -d --build
-=======
 uvicorn main:app --reload
->>>>>>> f72acd9 (update)

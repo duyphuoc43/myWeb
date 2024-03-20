@@ -1,4 +1,4 @@
-from sqlalchemy.dialects.mysql import FLOAT, DATETIME, TINYBLOB, CHAR
+from sqlalchemy.dialects.mysql import DOUBLE, DATETIME, LONGBLOB, TEXT
 from sqlalchemy import create_engine, Column, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
@@ -16,16 +16,16 @@ class History(Base):
     '''History'''
     __tablename__ = "history"
     date = Column(DATETIME, primary_key=True)
-    location = Column(CHAR)
-    image = Column(TINYBLOB, default=None)
+    location = Column(TEXT)
+    image = Column(LONGBLOB, default=None)
 
 
 class Data(Base):
     '''History'''
     __tablename__ = "data"
     date = Column(DATETIME, primary_key=True)
-    pressure = Column(FLOAT)
-    flow = Column(FLOAT)
+    flow = Column(DOUBLE)
+    pressure = Column(DOUBLE)
 
 
 Base.metadata.create_all(engine)

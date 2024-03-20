@@ -1,1 +1,1 @@
-from .controller import app, read_root
+from .controller import app

@@ -1,1 +1,1 @@
-from .service import coverData, predictions, add_values_to_last_row, add_data
+from .service import coverData, predictions, add_data, get_data, add_history, get_history

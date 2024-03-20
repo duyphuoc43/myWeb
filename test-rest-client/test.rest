@@ -36,6 +36,20 @@ content-type: application/json
     "pressure": 15.5
 
 }
+### Successq
+GET  http://{{host}}/get-data HTTP/1.1
+content-type: application/json
 
+{
+}
+### Successq
+POST http://{{host}}/post-data HTTP/1.1
+content-type: application/json
+
+{
+    "date": "2",
+    "flow": 12,
+    "pressure": 160
+}
 
 
