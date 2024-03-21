@@ -7,6 +7,15 @@ from .. import models
 from ..models import session
 from datetime import datetime
 from sqlalchemy import desc, asc
+import base64
+
+def coverBinaryToBase64(image_data):
+    pre_img = np.frombuffer(image_data, np.uint16)
+    image_base64 = base64.b64encode(pre_img)
+    # Chuyển Base64 thành chuỗi Unicode (nếu cần)
+    # image_base64_str = image_base64.decode('utf-8')
+    return image_base64
+
 
 
 def coverData(flow_new, pressure_new):
@@ -98,24 +107,17 @@ def get_data():
     return len(result)
 
 
-def get_history(date_in):
-
-    result = (
+def get_history(date):
+    if(date == ''):
+        return None
+    response = []
+    history_query = (
         session.query(models.History).order_by(
-            asc('date')).filter(models.History.date.like(f'%{date_in}%')).first()
+            asc('date')).filter(models.History.date.like(f'%{date}%')).all()
     )
     session.close()
-
-    image_data = result.image
-
-    pre_img = np.frombuffer(image_data, np.uint16)
-    print(pre_img)
-    image = cv2.imdecode(pre_img, cv2.IMREAD_COLOR)
-    original_height, original_width = image.shape[:2]
-    new_width = 1920
-    new_height = 1080
-    image = cv2.resize(image, (new_width, new_height))
-    cv2.imwrite('new_image.jpg', image)
-
-    return {
-        "text": image.shape}
+    for history in history_query:
+        history.image = coverBinaryToBase64(history.image)
+        response.append(history)
+    
+    return response

@@ -33,3 +33,6 @@ class History(BaseModel):
     date: str
     location: str
     image: List[List[float]]
+
+class HistoryDate(BaseModel):
+    date: str

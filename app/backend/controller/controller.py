@@ -2,19 +2,28 @@
 
 from fastapi import FastAPI, File, UploadFile
 from typing import Annotated
-from ..schemas import Item, hourAndFlow, Arrays, Image, Statistics, History
+from ..schemas import Item, hourAndFlow, Arrays, Image, Statistics, History,HistoryDate
 from ..service import coverData, predictions, add_data, get_data, add_history, get_history
 from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
 from typing import Union
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def read_root():
     '''Get'''
-    return {"message": "Hello, World"}
+    response = {"message": "Hello, World"}
+    return JSONResponse(content=response)
 
 
 @app.get("/prediction/{flow}/{pressure}")
@@ -55,14 +64,21 @@ async def get_dat():
 
 
 @app.post("/post-history/")
-async def post_data(request: History):
+async def post_history(request: History):
     '''Post History'''
     add_history(request)
     return "Đã Cập Nhập"
 
 
 @app.get("/get-history/{date}")
-async def get_dat(date: str):
-    '''Get data'''
+async def history(date: str):
+    '''Get history'''
     response = get_history(date)
+    return response
+
+@app.post("/get-history/")
+async def history(request : HistoryDate):
+    '''Post history'''
+    response = get_history(request.date)
+    print(response)
     return response
