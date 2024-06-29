@@ -2,8 +2,11 @@
 
 from fastapi import FastAPI, File, UploadFile
 from typing import Annotated
-from ..schemas import Item, hourAndFlow, Arrays, Image, Statistics, History,HistoryDate
-from ..service import coverData, predictions, add_data, get_data, add_history, get_history
+
+from schemas import Item, hourAndFlow, Arrays, Image, Statistics, History, HistoryDate
+
+from service import coverData, predictions, add_data, get_data, add_history, get_history
+
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from typing import Union
@@ -22,9 +25,8 @@ app.add_middleware(
 @app.get("/")
 async def read_root():
     '''Get'''
-    response = {"message": "Hello, World"}
+    response = {"message": "Hello Duy Phuoc"}
     return JSONResponse(content=response)
-
 
 @app.get("/prediction/{flow}/{pressure}")
 async def prediction_get(flow: float, pressure: float):
@@ -37,7 +39,7 @@ async def prediction_get(flow: float, pressure: float):
 async def prediction(request: hourAndFlow):
     '''Post prediction'''
     response = predictions(coverData(request.flow, request.pressure))
-    return response
+    return ("y_predictions_scaled")
 
 
 @app.post("/upload-file/")

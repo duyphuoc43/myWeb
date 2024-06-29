@@ -3,12 +3,13 @@ from keras.models import load_model
 import numpy as np
 import csv
 import os
-from .. import models
-from ..models import session
+
+from models import session
 from datetime import datetime
 from sqlalchemy import desc, asc
 import base64
 
+import models
 def coverBinaryToBase64(image_data):
     pre_img = np.frombuffer(image_data, np.uint16)
     image_base64 = base64.b64encode(pre_img)
@@ -16,12 +17,10 @@ def coverBinaryToBase64(image_data):
     # image_base64_str = image_base64.decode('utf-8')
     return image_base64
 
-
-
 def coverData(flow_new, pressure_new):
     result = (
         session.query(models.Data).order_by(
-            desc('date')).limit(198).all()
+            desc('date')).limit(99).all()
     )
     result_array = []
     for data in result:
@@ -35,19 +34,17 @@ def coverData(flow_new, pressure_new):
     print(data.shape)
     return data
 
-
 def predictions(x_prediction):
+    print(x_prediction)
     x_prediction = np.array(x_prediction).reshape(
         1, len(x_prediction), len(x_prediction[1]))
 
-    loaded_model = load_model(
-        'backend/models_AI/best_model_24.h5')
+    loaded_model = load_model('C:/Users/duyph/Desktop/water_pressure/myWeb/app/backend/models_AI/best_model_24.h5')
     y_predictions_scaled = loaded_model.predict(x_prediction)
     print(y_predictions_scaled)
     y_predictions_scaled = y_predictions_scaled.flatten().tolist()
 
     return {"array": y_predictions_scaled}
-
 
 def add_data(request):
     request.date = datetime.now()
@@ -55,8 +52,8 @@ def add_data(request):
         date=request.date, pressure=request.pressure, flow=request.flow)
 
     session.add(session_history)
-    # session.commit()
-    # session.close()
+    session.commit()
+    session.close()
     try:
         session.commit()
     except Exception as ex:
@@ -65,7 +62,6 @@ def add_data(request):
     finally:
         if session:
             session.close()
-
 
 def add_history(request):
     request.date = datetime.now()
@@ -94,14 +90,14 @@ def get_data():
         session.query(models.Data).order_by(
             asc('date')).all()
     )
-    # result_array = []
-    # for data in result:
-    #     flow = float(data.flow)
-    #     pressure = float(data.pressure)
-    #     print(data.date)
-    #     array = [flow, pressure]
-    #     result_array.append(array)
-    # data = np.array(result_array)
+    result_array = []
+    for data in result:
+        flow = float(data.flow)
+        pressure = float(data.pressure)
+        print(data.date)
+        array = [flow, pressure]
+        result_array.append(array)
+    data = np.array(result_array)
     print(len(result))
     session.close()
     return len(result)

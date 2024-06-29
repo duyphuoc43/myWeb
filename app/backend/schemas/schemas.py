@@ -3,7 +3,6 @@ from typing import List
 
 
 class Item(BaseModel):
-
     name: str
     description: str = None
     price: float = None

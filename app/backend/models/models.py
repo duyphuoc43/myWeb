@@ -7,7 +7,7 @@ import time
 time.sleep(3)
 
 engine = create_engine(
-    'mysql+mysqlconnector://phuocvnd:phuocvnd@192.85.4.173:3307/mydatabase')
+    'mysql+mysqlconnector://duyphuoc:bebiu2020@127.0.0.1:3306/mydatabase')
 
 Base = declarative_base()
 
@@ -18,7 +18,6 @@ class History(Base):
     date = Column(DATETIME, primary_key=True)
     location = Column(TEXT)
     image = Column(LONGBLOB, default=None)
-
 
 class Data(Base):
     '''History'''

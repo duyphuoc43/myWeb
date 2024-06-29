@@ -14,7 +14,7 @@
   
   onMounted(async () => {
     try {
-      const response = await axios.get(`http://192.85.4.173:8001`);
+      const response = await axios.get(`http://127.0.0.1/:8001`);
       console.log(response)
       posts.value = response.data;
     } catch (error) {

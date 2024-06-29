@@ -1,0 +1,55 @@
+@hostname = localhost
+@port = 8001
+@host = {{hostname}}:{{port}}
+
+### Successq
+POST http://{{host}}/statistics HTTP/1.1
+content-type: application/json
+
+{
+    "date": "2024-03-06 11:36:16.069239",
+    "flow": 55,
+    "pressure": 160
+}
+
+### Successq
+POST http://{{host}}/upload_file HTTP/1.1
+content-type: application/json
+
+{
+    curl -X POST -F "file=@/path/to/your/image.jpg" http://localhost:8000/upload-image/
+}
+
+
+### Success
+GET  http://{{host}}/prediction/130/14 HTTP/1.1
+content-type: application/json
+
+{}
+
+### Successq
+POST http://{{host}}/prediction HTTP/1.1
+content-type: application/json
+
+{
+    "flow" : 112,
+    "pressure": 15.5
+
+}
+### Successq
+GET  http://{{host}}/get-data HTTP/1.1
+content-type: application/json
+
+{
+}
+### Successq
+POST http://{{host}}/post-data HTTP/1.1
+content-type: application/json
+
+{
+    "date": "2",
+    "flow": 12,
+    "pressure": 160
+}
+
+
